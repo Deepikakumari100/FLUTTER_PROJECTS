@@ -1,0 +1,146 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: ProfilePage(),
+      debugShowCheckedModeBanner: false,
+    );
+  }
+}
+
+class ProfilePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        selectedItemColor: Colors.black,
+        unselectedItemColor: Colors.grey,
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.search), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.add), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.notifications_none), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: ''),
+        ],
+      ),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Header
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
+                    Text(
+                      'Profile',
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                    Icon(Icons.settings),
+                  ],
+                ),
+                SizedBox(height: 20),
+
+                // Avatar
+                Center(
+                  child: CircleAvatar(
+                    radius: 50,
+                    backgroundImage: AssetImage('assets/images/avtaar_image.png'), // Replace with your image
+                  ),
+                ),
+                SizedBox(height: 12),
+
+                // Name
+                Center(
+                  child: Column(
+                    children: const [
+                      Text(
+                        'Ethan Carter',
+                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(height: 4),
+                      Text(
+                        'Product Designer',
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                      Text(
+                        'San Francisco, CA',
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 24),
+
+                // Skills
+                Text('Skills', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                SizedBox(height: 8),
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: [
+                    skillChip('UI/UX Design'),
+                    skillChip('User Research'),
+                    skillChip('Prototyping'),
+                    skillChip('Wireframing'),
+                    skillChip('Design Systems'),
+                    skillChip('Interaction Design'),
+                  ],
+                ),
+                SizedBox(height: 24),
+
+                // About
+                Text('About', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                SizedBox(height: 8),
+                Text(
+                  "Ethan is a product designer with over 5 years of experience in creating user-centered designs. He specializes in UI/UX design, user research, and prototyping. Ethan is passionate about solving complex problems and creating intuitive and engaging user experiences.",
+                  style: TextStyle(fontSize: 14),
+                ),
+                SizedBox(height: 24),
+
+                // Contact
+                Text('Contact', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                SizedBox(height: 12),
+                contactRow(Icons.email, 'ethan.carter@email.com'),
+                contactRow(Icons.phone, '(555) 123-4567'),
+                contactRow(Icons.link, 'linkedin.com/in/ethancarter'),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget skillChip(String label) {
+    return Chip(
+      label: Text(label),
+      backgroundColor: Colors.grey[200],
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8),
+      ),
+    );
+  }
+
+  Widget contactRow(IconData icon, String text) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 6),
+      child: Row(
+        children: [
+          Icon(icon, size: 20),
+          SizedBox(width: 10),
+          Expanded(child: Text(text, style: TextStyle(fontSize: 14))),
+        ],
+      ),
+    );
+  }
+}
